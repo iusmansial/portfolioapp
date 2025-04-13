@@ -42,7 +42,7 @@ class Appsscreen extends StatelessWidget {
                       backgroundColor: Colors.amber,
                       child: ClipOval(
                         child: Image.network(
-                          "https://drive.google.com/uc?export=view&id=17jPVZzA9wMTju7LebsIvHN7UJnVar4dN",
+                          "https://res.cloudinary.com/dkzn9hiks/image/upload/v1744425403/Screenshot_2025-04-10-20-06-30-83_1c337646f29875672b5a61192b9010f9_gtgofu.jpg",
                           fit: BoxFit
                               .cover, // Ensures the image covers the circular area
                           width: height *
@@ -60,7 +60,7 @@ class Appsscreen extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.white,
                         // fontWeight: FontWeight.bold,
-                        fontSize: 12,
+                        fontSize: height * 0.014,
                       ),
                     ),
                   ),
@@ -72,19 +72,19 @@ class Appsscreen extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 13,
+                        fontSize: height * 0.016,
                       ),
                     ),
                   ),
                   Positioned(
-                    top: height * 0.15,
+                    top: height * 0.13,
                     left: width * 0.02,
                     child: Text(
                       "Lets Explore Some Apps",
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                        fontSize: height * 0.018,
                       ),
                     ),
                   )
@@ -109,6 +109,7 @@ class Appsscreen extends StatelessWidget {
                                 builder: (context) => Apppreview(
                                   height: height,
                                   width: width,
+                                  app: app,
                                 ),
                               ),
                             );
@@ -150,42 +151,49 @@ class Appsscreen extends StatelessWidget {
                                             width: 1.5,
                                           ),
                                         ),
-                                        child: Stack(
-                                          children: [
-                                            Positioned(
-                                              left: width * 0.05,
-                                              top: width * 0.03,
-                                              child: Text(
-                                                app.title,
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 14,
-                                                ),
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            // crossAxisAlignment: cros,
+                                            children: [
+                                              SizedBox(
+                                                width: 15,
                                               ),
-                                            ),
-                                            Positioned(
-                                              left: width * 0.05,
-                                              top: width * 0.08,
-                                              child: Text(
-                                                app.category,
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 10,
-                                                ),
+                                              Wrap(
+                                                direction: Axis.vertical,
+                                                children: [
+                                                  Text(
+                                                    app.title,
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: height * 0.016,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    app.category,
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: height * 0.012,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                            ),
-                                            Positioned(
-                                              left: width * 0.5,
-                                              top: width * 0.04,
-                                              child: Icon(
+                                              Spacer(),
+                                              Icon(
                                                 Icons
                                                     .arrow_circle_right_outlined,
                                                 color: Colors.white,
                                               ),
-                                            ),
-                                          ],
+                                              SizedBox(
+                                                width: 10,
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),

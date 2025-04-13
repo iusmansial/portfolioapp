@@ -57,7 +57,7 @@ class _MainscreenState extends State<Mainscreen> {
                 ),
                 image: DecorationImage(
                   image: NetworkImage(
-                    "https://drive.google.com/uc?export=view&id=17jPVZzA9wMTju7LebsIvHN7UJnVar4dN",
+                    "https://res.cloudinary.com/dkzn9hiks/image/upload/v1744425403/Screenshot_2025-04-10-20-06-30-83_1c337646f29875672b5a61192b9010f9_gtgofu.jpg",
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -69,46 +69,46 @@ class _MainscreenState extends State<Mainscreen> {
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 24,
+                      fontSize: widget.height * 0.03,
                       shadows: [Shadow(color: Colors.black, blurRadius: .5)]),
                 ),
               ),
             ),
           ),
           Positioned(
-            top: widget.height * 0.45,
+            top: widget.height * 0.48,
             left: widget.width * 0.05,
-            child: Container(
-              height: widget.height * .15,
-              width: widget.width * .6,
-              // color: Colors.blue,
-              child: Text(
-                "Usman Hameed",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 40,
+            child: Wrap(
+              direction: Axis.vertical,
+              children: [
+                Text(
+                  "Usman Hameed",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: widget.height * 0.047,
+                  ),
                 ),
-              ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: widget.height * .1,
+                  width: widget.width * .85,
+                  // color: Colors.blue,
+                  child: Text(
+                    "I’ve worked with Python for machine learning and focused mainly on app development using Flutter.",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: widget.height * 0.018,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          Positioned(
-            top: widget.height * 0.6,
-            left: widget.width * 0.05,
-            child: Container(
-              height: widget.height * .1,
-              width: widget.width * .85,
-              // color: Colors.blue,
-              child: Text(
-                "I’ve worked with Python for machine learning and focused mainly on app development using Flutter.",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                ),
-              ),
-            ),
-          ),
+
           Positioned(
             top: widget.height * 0.7,
             child: Container(
@@ -121,11 +121,11 @@ class _MainscreenState extends State<Mainscreen> {
                       BorderRadius.horizontal(right: Radius.circular(100))),
               child: Center(
                 child: Text(
-                  "6+ works",
+                  "2 works",
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 30,
+                    fontSize: widget.height * 0.032,
                   ),
                 ),
               ),
@@ -157,7 +157,7 @@ class _MainscreenState extends State<Mainscreen> {
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 25,
+                        fontSize: widget.height * 0.03,
                       ),
                     ),
                   ),

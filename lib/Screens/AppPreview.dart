@@ -1,17 +1,19 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
-
+import 'package:portfolioapp/Model%20Class/ModelClass.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Apppreview extends StatelessWidget {
-  var height, width;
-  Apppreview({required this.height, required this.width});
-  final List<String> gameImages = [
-    "https://upload.wikimedia.org/wikipedia/en/8/87/Call_of_Duty_Infinite_Warfare_cover.jpg",
-    "https://upload.wikimedia.org/wikipedia/en/8/87/Call_of_Duty_Infinite_Warfare_cover.jpg",
-    "https://upload.wikimedia.org/wikipedia/en/8/87/Call_of_Duty_Infinite_Warfare_cover.jpg",
-    "https://upload.wikimedia.org/wikipedia/en/8/87/Call_of_Duty_Infinite_Warfare_cover.jpg",
-  ];
+  final double height, width;
+  final DataApp app; // Accept the DataApp object
+
+  Apppreview({
+    required this.height,
+    required this.width,
+    required this.app, // Initialize it
+  });
+
   void _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
@@ -31,7 +33,6 @@ class Apppreview extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
-            // stops: [.3, 3, .0],
             colors: [
               Colors.black,
               const Color.fromARGB(255, 14, 57, 91),
@@ -45,9 +46,7 @@ class Apppreview extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: height * 0.1,
-                  ),
+                  SizedBox(height: height * 0.1),
                   Center(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(30),
@@ -56,101 +55,98 @@ class Apppreview extends StatelessWidget {
                         width: width * 0.9,
                         color: Colors.amber,
                         child: Image.network(
-                          "https://upload.wikimedia.org/wikipedia/en/8/87/Call_of_Duty_Infinite_Warfare_cover.jpg",
+                          app.mainImage, // Use the mainImage from the app
                           fit: BoxFit.cover,
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  SizedBox(height: 20),
                   Wrap(
                     direction: Axis.vertical,
                     children: [
                       Text(
-                        "Call of Duty Mobile",
+                        app.title, // Use the title from the app
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 25,
+                          fontSize: height * 0.022,
                         ),
                       ),
                       Text(
-                        "Shooting Game",
+                        app.category, // Use the category from the app
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.normal,
-                          fontSize: 14,
+                          fontSize: height * 0.016,
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  SizedBox(height: 10),
                   SizedBox(
                     child: Text(
-                      "Call of Duty: Mobile is a fast-paced first-person shooter game designed for mobile devices. It features classic multiplayer modes like Team Deathmatch, Battle Royale, and iconic maps from the Call of Duty franchise. With customizable loadouts, ranked matches, and seasonal updates, it delivers a console-quality FPS experience on the go.",
+                      app.description, // Use the description from the app
                       style: TextStyle(
                         color: Colors.white.withOpacity(.4),
                         fontWeight: FontWeight.normal,
-                        fontSize: 13,
+                        fontSize: height * 0.015,
                       ),
                     ),
                   ),
-                  Container(
-                    height: height * 0.6,
-                    width: width * 0.9,
-                    child: GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, // 2 items per row
-                        crossAxisSpacing: 10, // Spacing between columns
-                        mainAxisSpacing: 10, // Spacing between rows
+                  SizedBox(height: 10),
+                  Center(
+                    child: Container(
+                      height: height * 0.6,
+                      width: width * 0.9,
+                      child: CarouselSlider(
+                        items:
+                            app.extraImages // Use the extraImages from the app
+                                .map(
+                                  (imageUrl) => ClipRRect(
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: Image.network(
+                                      imageUrl,
+                                      fit: BoxFit.fitHeight,
+                                      width: width * 0.9,
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                        options: CarouselOptions(
+                          height: height * 0.6,
+                          viewportFraction: 0.65,
+                          // enlargeCenterPage: true,
+                          autoPlay: true,
+                        ),
                       ),
-                      itemCount: gameImages.length,
-                      itemBuilder: (context, index) {
-                        return ClipRRect(
-                          borderRadius:
-                              BorderRadius.circular(20), // Rounded corners
-                          child: Container(
-                            color:
-                                Colors.grey.shade800, // Placeholder background
-                            child: Image.network(
-                              gameImages[index],
-                              fit: BoxFit
-                                  .cover, // Ensures the image covers the container
-                            ),
-                          ),
-                        );
-                      },
                     ),
                   ),
+                  SizedBox(
+                    height: 80,
+                  )
                 ],
               ),
             ),
             Positioned(
-              top: height * 0.88,
-              left: 0, // Ensure the container starts from the left edge
-              right: 0, // Ensure the container ends at the right edge
+              top: height * 0.86,
+              left: 0,
+              right: 0,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(30), // Rounded corners
+                borderRadius: BorderRadius.circular(30),
                 child: BackdropFilter(
-                  filter: ImageFilter.blur(
-                      sigmaX: 10, sigmaY: 10), // Blur intensity
+                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                   child: GestureDetector(
-                    onTap: () => _launchURL('https://www.google.com'),
+                    onTap: () =>
+                        _launchURL(app.link), // Use the link from the app
                     child: Container(
                       height: height * 0.1,
                       width: width,
                       decoration: BoxDecoration(
-                        color: Colors.blue.shade900
-                            .withOpacity(0.2), // Semi-transparent overlay
-                        borderRadius:
-                            BorderRadius.circular(30), // Rounded corners
+                        color: Colors.blue.shade900.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(30),
                         border: Border.all(
-                          color: Colors.white
-                              .withOpacity(0.2), // Border for glass effect
+                          color: Colors.white.withOpacity(0.2),
                           width: 1.5,
                         ),
                       ),
